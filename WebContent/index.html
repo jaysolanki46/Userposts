@@ -86,7 +86,7 @@
 </style>
 <body>
 <div class="card" id="app">
-  <h3 class="card-header">STRAKER TRANSLATIONS TEST</h3>
+  <h3 class="card-header">STRAKER TRANSLATIONS</h3>
   <h5 class="card-header">USER POSTS</h5>
  	<div class="card-columns" style="margin: 1rem;">
 		
@@ -113,7 +113,7 @@
 		    <div id="postListModel" style="margin: 1rem;">
 			    <div class="card-columns" style="margin: 1rem;">
 					  <div class="card" style="cursor: pointer;" v-for="post, index in posts" onclick="showPostContent()" v-on:click="getUserPostDetails(post.id)" v-bind:id="post.id">
-					    <center><img class="card-img-top" src="img/post.svg" alt="Card image cap" style="width: 10rem; margin-top: 1rem;"></center>
+					    <center><img class="card-img-top" src="imgs/post.svg" alt="Card image cap" style="width: 10rem; margin-top: 1rem;"></center>
 					    <div class="card-body">
 					      <h4 class="card-title">{{ post.title }}</h4>
 					    </div>
@@ -124,7 +124,7 @@
 		     <div id="postDetailModel" style="margin: 1rem; display: none" >
 				
 			     <div class="card"> 
-			    <img class="card-img-top" src="img/back.svg" alt="Card image cap" onclick="showPostList()" style="width: 1rem; margin: 1rem; cursor: pointer;"> Back to list
+			    <img class="card-img-top" src="imgs/back.svg" alt="Card image cap" onclick="showPostList()" style="width: 1rem; margin: 1rem; cursor: pointer;"> Back to list
 				    <div class="card-body">
 				      <h4>
 					      {{ postDetails.title }}
