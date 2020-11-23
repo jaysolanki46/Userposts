@@ -8,3 +8,8 @@ This is a sample exercise of Vue.js. It is a single page application that retrie
 
 # Screenshorts
 
+![Alt text](https://github.com/jaysolanki46/Userposts/blob/master/WebContent/imgs/index.JPG "Index")
+
+![Alt text](https://github.com/jaysolanki46/Userposts/blob/master/WebContent/imgs/model.JPG "Post List")
+
+![Alt text](https://github.com/jaysolanki46/Userposts/blob/master/WebContent/imgs/model-details.JPG "Post details")
