@@ -9,8 +9,8 @@ Vue.js, CoreUI, HTML, CSS
 # API
 
 Webiste: https://jsonplaceholder.typicode.com
-Users: https://jsonplaceholder.typicode.com/users   
-Posts: https://jsonplaceholder.typicode.com/posts
+
+# Demo
 
 ![Alt text](https://github.com/jaysolanki46/Userposts/blob/master/WebContent/videos/demo.gif "Demo")
 
