@@ -3,7 +3,10 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Users</title>
+	<title>Straker Translations - User Posts</title>
+	
+	<!-- Icon -->
+	<link rel="icon" href="https://logo.clearbit.com/strakertranslations.com	">
 	
 	<!--  Axios - Pulling data from ajax request to Vue Js  -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -81,42 +84,57 @@
 </style>
 <body>
 <div class="card" id="app">
-  <h3 class="card-header">STRAKER TEST</h3>
+  <h3 class="card-header">STRAKER TRANSLATIONS TEST</h3>
   <h5 class="card-header">USER POSTS</h5>
  	<div class="card-columns" style="margin: 1rem;">
 		
-		 <div class="card" v-for="user, index in users">
+		 <div class="card" v-for="user, index in users" v-on:click="getUserPosts(user.id, user.name)" v-bind:id="user.id"> 
 		    <div class="card-body">
 		      <h5 class="card-title"><i class="cil-user"></i>&nbsp;{{ user.name }}</h5>
 		      <h6 class="card-title"><i class="cib-minutemailer"></i>&nbsp;&nbsp;&nbsp;{{ user.email.toLowerCase() }}</h6>
 		      <h6 class="card-title"><i class="cil-phone"></i>&nbsp;&nbsp;&nbsp;{{ user.phone }}</h6>
 		      <p class="card-text"><i class="cil-home"></i>&nbsp;&nbsp;&nbsp;{{ user.address.city }}</p>
-		      <button class="btn btn-primary"onclick="show('{{ user.address.id }}')">Posts...</button>
+		      <button class="btn btn-primary" onclick="showPostList()" style="float: right; margin-bottom: 1rem;"><i class="cil-library"></i></button>
 		    </div>
 		 </div>
 		 
 		<!-- The Modal -->
-		<div id="myModal" class="modal">
+		<div id="postModel" class="modal">
 		
 		  <!-- Modal content -->
 		  <div class="modal-content">
 		   
 		    <div id="header">
-		      <h2 class="card-header">Username <span class="close">&times;</span></h2>
+		      <h2 class="card-header"><i class="cil-library"></i> &nbsp;{{ username }} Posts <span class="close">&times;</span></h2>
 		    </div>
 		    
-		    <div id="body" style="margin: 1rem;">
-			     <div class="card">
+		    <div id="postListModel" style="margin: 1rem;">
+			    <div class="card-columns" style="margin: 1rem;">
+					  <div class="card" style="cursor: pointer;" v-for="post, index in posts" onclick="showPostContent()" v-on:click="getUserPostDetails(post.id)" v-bind:id="post.id">
+					    <center><img class="card-img-top" src="img/post.svg" alt="Card image cap" style="width: 10rem; margin-top: 1rem;"></center>
+					    <div class="card-body">
+					      <h4 class="card-title">{{ post.title }}</h4>
+					    </div>
+					  </div>
+				</div>
+		    </div>
+		    
+		     <div id="postDetailModel" style="margin: 1rem; display: none" >
+				
+			     <div class="card"> 
+			    <img class="card-img-top" src="img/back.svg" alt="Card image cap" onclick="showPostList()" style="width: 1rem; margin: 1rem; cursor: pointer;"> Back to list
 				    <div class="card-body">
-				      <h5 class="card-title"><i class="cil-user"></i>&nbsp;1</h5>
-				      <h6 class="card-title"><i class="cib-minutemailer"></i>&nbsp;&nbsp;&nbsp;2</h6>
-				      <h6 class="card-title"><i class="cil-phone"></i>&nbsp;&nbsp;&nbsp;3</h6>
-				      <p class="card-text"><i class="cil-home"></i>&nbsp;&nbsp;&nbsp;3</p>
+				      <h4>
+					      {{ postDetails.title }}
+				      </h4>
+				      <p class="card-text" style="margin-left: 0.1rem; margin-right: 0.5rem;">{{ postDetails.body }}</p>	
 				    </div>
 				 </div>
-				 
 		    </div>
+		    
 		  </div>
+		  
+		  
 	</div>
 </div>
 </div>
@@ -127,7 +145,10 @@
 	var app = new Vue({
 		el: '#app',
 		data: {
-			users: []
+			users: [],
+			username: '',
+			posts: [],
+			postDetails: ''
 		},
 		mounted: function() {
 			
@@ -139,22 +160,53 @@
 			  .catch(error => {
 			    console.log(error);
 			  })
-		}
+		},
+		methods: {
+			getUserPosts: function (id, name) {
+		    	  
+				 this.username = name;
+				 
+		    	  axios.get('https://jsonplaceholder.typicode.com/posts?userId='+id)
+				  .then(response => {
+				    this.posts = response.data;
+				    console.log(response);
+				  })
+				  .catch(error => {
+				    console.log(error);
+				  })
+		      },
+		
+			getUserPostDetails: function (id) {
+		    	  
+		    	  axios.get('https://jsonplaceholder.typicode.com/posts/'+id)
+				  .then(response => {
+				    this.postDetails = response.data;
+				    console.log(response);
+				  })
+				  .catch(error => {
+				    console.log(error);
+				  })
+		      }
+		 }
+		
 	})
 
 
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
+var modal = document.getElementById("postModel");
+var	postListModel = document.getElementById("postListModel");
+var postDetailModel = document.getElementById("postDetailModel");
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-function show() {
+function showPostList() {
   modal.style.display = "block";
+  postListModel.style.display = "block";
+  postDetailModel.style.display = "none";
+}
+
+function showPostContent() {
+	postListModel.style.display = "none";
+	postDetailModel.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
@@ -167,6 +219,23 @@ window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
+}
+
+function showArrow(val) {
+
+	var imgRight = document.getElementById("img-right");
+	var imgDown = document.getElementById("img-down");
+	var value = val;
+	
+	if(value.localeCompare("down") == 0) {
+		imgRight.style.display = "none";
+		imgDown.style.display = "block";
+	} else if (value.localeCompare("right") == 0) {
+		alert("Hi");
+		imgRight.style.display = "block";
+		imgDown.style.display = "none";
+	}
+		
 }
 </script>
 
