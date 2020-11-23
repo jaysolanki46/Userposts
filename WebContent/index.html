@@ -8,10 +8,12 @@
 	<!-- Icon -->
 	<link rel="icon" href="https://logo.clearbit.com/strakertranslations.com	">
 	
-	<!--  Axios - Pulling data from ajax request to Vue Js  -->
+	<!--  Axios - Pulling API data from ajax request to Vue Js  -->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
 	<!--  Vue -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	
 	<!-- CoreUI CSS -->
 	<link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
 	<link rel="stylesheet" href="https://unpkg.com/@coreui/icons@2.0.0-beta.3/css/all.min.css">
@@ -134,11 +136,9 @@
 		    
 		  </div>
 		  
-		  
 	</div>
 </div>
 </div>
-
 
 <script>
 
@@ -150,6 +150,7 @@
 			posts: [],
 			postDetails: ''
 		},
+		
 		mounted: function() {
 			
 			axios.get('https://jsonplaceholder.typicode.com/users')
@@ -161,6 +162,7 @@
 			    console.log(error);
 			  })
 		},
+		
 		methods: {
 			getUserPosts: function (id, name) {
 		    	  
@@ -220,25 +222,7 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-
-function showArrow(val) {
-
-	var imgRight = document.getElementById("img-right");
-	var imgDown = document.getElementById("img-down");
-	var value = val;
-	
-	if(value.localeCompare("down") == 0) {
-		imgRight.style.display = "none";
-		imgDown.style.display = "block";
-	} else if (value.localeCompare("right") == 0) {
-		alert("Hi");
-		imgRight.style.display = "block";
-		imgDown.style.display = "none";
-	}
-		
-}
 </script>
-
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
 <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.bundle.min.js"></script>
